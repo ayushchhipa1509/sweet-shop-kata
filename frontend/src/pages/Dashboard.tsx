@@ -20,7 +20,8 @@ export default function Dashboard() {
       return;
     }
     // Get current user info from API
-    authAPI.getMe()
+    authAPI
+      .getMe()
       .then((userData) => {
         setUser(userData);
         setIsAdmin(userData.role === "admin");
@@ -69,18 +70,30 @@ export default function Dashboard() {
     }
   };
 
+  // Show Add Sweet button if user is logged in (has token)
+  const hasToken = localStorage.getItem("token") !== null;
+
   return (
     <div className="dashboard">
       <header className="dashboard-header">
         <h1>Sweet Shop Management System</h1>
         <div className="header-actions">
-          {isAdmin && (
-            <button
-              className="btn-primary"
-              onClick={() => setShowAddModal(true)}
-            >
-              Add Sweet
-            </button>
+          {hasToken && (
+            <>
+              <button
+                className="btn-profile"
+                onClick={() => navigate("/profile")}
+                title="View Profile"
+              >
+                👤 Profile
+              </button>
+              <button
+                className="btn-primary"
+                onClick={() => setShowAddModal(true)}
+              >
+                Add Sweet
+              </button>
+            </>
           )}
           <button className="btn-secondary" onClick={handleLogout}>
             Logout
@@ -95,7 +108,7 @@ export default function Dashboard() {
           <div className="empty-state">
             <p>
               No sweets available.{" "}
-              {isAdmin && "Add some sweets to get started!"}
+              {hasToken && "Add some sweets to get started!"}
             </p>
           </div>
         ) : (

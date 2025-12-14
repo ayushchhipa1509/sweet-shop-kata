@@ -23,7 +23,8 @@
 }
 
 .btn-primary,
-.btn-secondary {
+.btn-secondary,
+.btn-profile {
   padding: 10px 20px;
   border: none;
   border-radius: 8px;
@@ -50,6 +51,17 @@
 
 .btn-secondary:hover {
   background: #e0e0e0;
+}
+
+.btn-profile {
+  background: #4caf50;
+  color: white;
+}
+
+.btn-profile:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+  background: #45a049;
 }
 
 .dashboard-content {
