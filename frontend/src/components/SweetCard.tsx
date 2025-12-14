@@ -4,13 +4,17 @@ import "./SweetCard.css";
 interface SweetCardProps {
   sweet: Sweet;
   onPurchase: (id: number) => void;
+  onDelete?: (id: number) => void;
   isPurchasing: boolean;
+  isAdmin?: boolean;
 }
 
 export default function SweetCard({
   sweet,
   onPurchase,
+  onDelete,
   isPurchasing,
+  isAdmin = false,
 }: SweetCardProps) {
   return (
     <div className="sweet-card">
@@ -28,13 +32,24 @@ export default function SweetCard({
           )}
         </div>
       </div>
-      <button
-        className="purchase-btn"
-        onClick={() => onPurchase(sweet.id)}
-        disabled={sweet.quantity === 0 || isPurchasing}
-      >
-        {isPurchasing ? "Purchasing..." : "Buy Now"}
-      </button>
+      <div className="sweet-actions">
+        <button
+          className="purchase-btn"
+          onClick={() => onPurchase(sweet.id)}
+          disabled={sweet.quantity === 0 || isPurchasing}
+        >
+          {isPurchasing ? "Purchasing..." : "Buy Now"}
+        </button>
+        {isAdmin && onDelete && (
+          <button
+            className="delete-btn"
+            onClick={() => onDelete(sweet.id)}
+            title="Delete sweet"
+          >
+            🗑️ Delete
+          </button>
+        )}
+      </div>
     </div>
   );
 }

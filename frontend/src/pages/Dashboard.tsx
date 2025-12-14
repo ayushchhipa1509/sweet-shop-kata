@@ -8,6 +8,7 @@ import "./Dashboard.css";
 
 export default function Dashboard() {
   const [user, setUser] = useState<any>(null);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [showAddModal, setShowAddModal] = useState(false);
   const navigate = useNavigate();
   const queryClient = useQueryClient();
@@ -18,8 +19,20 @@ export default function Dashboard() {
       navigate("/login");
       return;
     }
-    // Decode token to get user info (simplified - in production, decode properly)
-    // For now, we'll check if user is admin by trying to create a sweet
+    // Get current user info from API
+    authAPI.getMe()
+      .then((userData) => {
+        setUser(userData);
+        setIsAdmin(userData.role === "admin");
+      })
+      .catch((err) => {
+        console.error("Failed to get user info", err);
+        // If token is invalid, redirect to login
+        if (err.response?.status === 401) {
+          localStorage.removeItem("token");
+          navigate("/login");
+        }
+      });
   }, [navigate]);
 
   const { data: sweets = [], isLoading } = useQuery({
@@ -34,6 +47,13 @@ export default function Dashboard() {
     },
   });
 
+  const deleteMutation = useMutation({
+    mutationFn: sweetsAPI.delete,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["sweets"] });
+    },
+  });
+
   const handleLogout = () => {
     localStorage.removeItem("token");
     navigate("/login");
@@ -43,8 +63,11 @@ export default function Dashboard() {
     purchaseMutation.mutate(id);
   };
 
-  // Check if user is admin (simplified - in production, decode JWT properly)
-  const isAdmin = true; // This should be decoded from JWT token
+  const handleDelete = (id: number) => {
+    if (window.confirm("Are you sure you want to delete this sweet?")) {
+      deleteMutation.mutate(id);
+    }
+  };
 
   return (
     <div className="dashboard">
@@ -82,7 +105,9 @@ export default function Dashboard() {
                 key={sweet.id}
                 sweet={sweet}
                 onPurchase={handlePurchase}
+                onDelete={handleDelete}
                 isPurchasing={purchaseMutation.isPending}
+                isAdmin={isAdmin}
               />
             ))}
           </div>

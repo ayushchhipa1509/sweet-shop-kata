@@ -61,6 +61,11 @@ export const authAPI = {
     });
     return response.data;
   },
+
+  getMe: async (): Promise<User> => {
+    const response = await api.get("/auth/me");
+    return response.data;
+  },
 };
 
 export const sweetsAPI = {
@@ -77,6 +82,10 @@ export const sweetsAPI = {
   purchase: async (id: number): Promise<Sweet> => {
     const response = await api.post(`/sweets/${id}/purchase`);
     return response.data;
+  },
+
+  delete: async (id: number): Promise<void> => {
+    await api.delete(`/sweets/${id}`);
   },
 };
 
