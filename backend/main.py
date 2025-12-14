@@ -3,6 +3,7 @@ from pathlib import Path
 from contextlib import asynccontextmanager
 
 # Add project root to Python path if not already there
+# This MUST be done before any backend imports
 project_root = Path(__file__).parent.parent
 if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
