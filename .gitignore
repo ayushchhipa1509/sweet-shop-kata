@@ -1,1 +1,57 @@
+# PDF files
 .pdf
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+sweets.db
+
+# Environment variables
+.env
+.env.local
+
+# Test coverage
+.pytest_cache/
+.coverage
+htmlcov/
+*.html
+
+# OS
+.DS_Store
+Thumbs.db

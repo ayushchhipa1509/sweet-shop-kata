@@ -27,3 +27,22 @@ class Token(BaseModel):
 
 class TokenData(BaseModel):
     username: str | None = None
+
+
+# --- Sweet Schemas ---
+class SweetBase(BaseModel):
+    name: str
+    category: str
+    price: float
+    quantity: int
+
+
+class SweetCreate(SweetBase):
+    pass
+
+
+class SweetPublic(SweetBase):
+    id: int
+
+    class Config:
+        from_attributes = True

@@ -25,16 +25,16 @@ def session_fixture():
     SQLModel.metadata.drop_all(engine)
 
 
-# Client fixture for API tests (Phase 3+) - commented out for Phase 2
-# @pytest.fixture(name="client")
-# def client_fixture(session: Session):
-#     from backend.main import app
-#     from backend.database import get_session
-#
-#     def get_session_override():
-#         yield session
-#
-#     app.dependency_overrides[get_session] = get_session_override
-#     client = TestClient(app)
-#     yield client
-#     app.dependency_overrides.clear()
+# Client fixture for API tests (Phase 3+)
+@pytest.fixture(name="client")
+def client_fixture(session: Session):
+    from backend.main import app
+    from backend.database import get_session
+
+    def get_session_override():
+        yield session
+
+    app.dependency_overrides[get_session] = get_session_override
+    client = TestClient(app)
+    yield client
+    app.dependency_overrides.clear()
