@@ -16,16 +16,30 @@ pip install -r requirements.txt
 
 2. Run the backend server (from project root):
 
+**Recommended (simplest):**
 ```bash
 cd C:\Users\Dell\Desktop\sweet-shop-kata
-uvicorn backend.main:app --reload
+python -m uvicorn backend.main:app --reload
 ```
 
-Or if you're already in the backend directory, run from parent:
+**Alternative (with PYTHONPATH):**
 
+Windows (PowerShell):
+```powershell
+cd C:\Users\Dell\Desktop\sweet-shop-kata
+$env:PYTHONPATH = "."; uvicorn backend.main:app --reload
+```
+
+Windows (CMD):
+```cmd
+cd C:\Users\Dell\Desktop\sweet-shop-kata
+set PYTHONPATH=. && uvicorn backend.main:app --reload
+```
+
+Linux/Mac:
 ```bash
-cd ..
-uvicorn backend.main:app --reload
+cd /path/to/sweet-shop-kata
+PYTHONPATH=. uvicorn backend.main:app --reload
 ```
 
 The API will be available at `http://localhost:8000`
