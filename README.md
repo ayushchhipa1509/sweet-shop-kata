@@ -9,12 +9,12 @@ A full-stack web application for managing a sweet shop with user authentication,
   - First registered user automatically becomes admin
   - Admins can delete sweets and view statistics
   - All authenticated users can create sweets
-- **Sweet Management**: 
+- **Sweet Management**:
   - View all sweets (public)
   - Create new sweets (authenticated users)
   - Delete sweets (admin only)
   - Purchase sweets (decreases inventory)
-- **User Profile**: 
+- **User Profile**:
   - View user information
   - Admin dashboard with statistics (total sweets, in stock, out of stock)
   - Display user permissions
@@ -24,6 +24,7 @@ A full-stack web application for managing a sweet shop with user authentication,
 ## 🛠️ Tech Stack
 
 ### Backend
+
 - **FastAPI** 0.115.0 - Modern Python web framework
 - **SQLModel** 0.0.22 - SQL database ORM
 - **SQLite** - Database
@@ -33,6 +34,7 @@ A full-stack web application for managing a sweet shop with user authentication,
 - **Uvicorn** - ASGI server
 
 ### Frontend
+
 - **React 18** - UI library
 - **TypeScript** - Type safety
 - **Vite** - Build tool
@@ -73,27 +75,32 @@ sweet-shop-kata/
 ## 🚦 Quick Start
 
 ### Prerequisites
+
 - **Python 3.8+** installed
 - **Node.js 18+** and npm installed
 
 ### Backend Setup
 
 1. Navigate to the backend directory:
+
 ```bash
 cd backend
 ```
 
 2. Install Python dependencies:
+
 ```bash
 pip install -r requirements.txt
 ```
 
 3. Run the backend server:
+
 ```bash
 uvicorn main:app --reload
 ```
 
 The API will be available at:
+
 - **API**: `http://localhost:8000`
 - **API Documentation**: `http://localhost:8000/docs` (Swagger UI)
 - **Alternative Docs**: `http://localhost:8000/redoc`
@@ -101,16 +108,19 @@ The API will be available at:
 ### Frontend Setup
 
 1. Navigate to the frontend directory:
+
 ```bash
 cd frontend
 ```
 
 2. Install Node.js dependencies:
+
 ```bash
 npm install
 ```
 
 3. Run the frontend development server:
+
 ```bash
 npm run dev
 ```
@@ -129,6 +139,7 @@ The frontend will be available at `http://localhost:3000`
 ## 📡 API Endpoints
 
 ### Authentication
+
 - `POST /auth/register` - Register a new user
   - Request body: `{username, email, password}`
   - Returns: User object with role (first user = admin)
@@ -139,6 +150,7 @@ The frontend will be available at `http://localhost:3000`
   - Returns: User object with role
 
 ### Sweets
+
 - `GET /sweets` - Get all sweets (public, no authentication required)
 - `POST /sweets` - Create a new sweet (requires authentication)
   - Request body: `{name, category, price, quantity}`
@@ -146,6 +158,7 @@ The frontend will be available at `http://localhost:3000`
 - `POST /sweets/{id}/purchase` - Purchase a sweet (public, decreases quantity by 1)
 
 ### Health
+
 - `GET /health` - Health check endpoint
 
 ## 🧪 Testing
@@ -153,17 +166,20 @@ The frontend will be available at `http://localhost:3000`
 ### Backend Tests
 
 Run all tests:
+
 ```bash
 cd backend
 pytest tests/ -v
 ```
 
 Run specific test file:
+
 ```bash
 pytest tests/test_auth.py -v
 ```
 
 Generate HTML test report:
+
 ```bash
 pip install pytest-html
 pytest tests/ --html=report.html --self-contained-html
@@ -172,6 +188,7 @@ pytest tests/ --html=report.html --self-contained-html
 ### Test Coverage
 
 The test suite includes:
+
 - Database model tests (User, Sweet creation)
 - Authentication tests (registration, login, token validation)
 - Sweets API tests (CRUD operations, purchase logic, authorization)
@@ -181,12 +198,14 @@ The test suite includes:
 ### User Roles
 
 **Admin User:**
+
 - Can create sweets
 - Can delete sweets
 - Can view admin dashboard with statistics
 - First registered user automatically becomes admin
 
 **Regular User:**
+
 - Can create sweets
 - Can view and purchase sweets
 - Cannot delete sweets
@@ -204,6 +223,7 @@ The test suite includes:
 ### Running in Development Mode
 
 Both backend and frontend support hot-reload:
+
 - Backend: `uvicorn main:app --reload` (auto-reloads on file changes)
 - Frontend: `npm run dev` (Vite HMR enabled)
 
@@ -212,6 +232,7 @@ Both backend and frontend support hot-reload:
 The application uses SQLite database (`sweets.db` in the backend directory). The database is automatically created on first startup.
 
 To reset the database:
+
 1. Stop the backend server
 2. Delete `backend/sweets.db`
 3. Restart the backend server (database will be recreated)
@@ -221,17 +242,20 @@ To reset the database:
 Throughout this project, I used AI assistance (ChatGPT) as a pair programming partner:
 
 ### Phase 1 - Project Setup
+
 - Set up the initial FastAPI project structure
 - Created health check endpoint
 - Configured project structure and dependencies
 
 ### Phase 2 - Database Models & Core Logic
+
 - Created SQLModel models for User and Sweet entities
 - Set up database connection with SQLite
 - Implemented test fixtures with in-memory database for test isolation
 - AI helped with model definitions, relationships, and test structure
 
 ### Phase 3 - Authentication System
+
 - Implemented JWT token generation and validation
 - Created password hashing with bcrypt (passlib)
 - Built registration and login endpoints
@@ -241,6 +265,7 @@ Throughout this project, I used AI assistance (ChatGPT) as a pair programming pa
 - AI assisted with JWT implementation, security best practices, and token handling
 
 ### Phase 4 - Sweets API
+
 - Created CRUD endpoints for sweets
 - Implemented purchase logic with quantity management
 - Added role-based access control
@@ -249,6 +274,7 @@ Throughout this project, I used AI assistance (ChatGPT) as a pair programming pa
 - AI helped with FastAPI dependency injection patterns, error handling, and API design
 
 ### Phase 5 - Frontend Implementation
+
 - Set up React + TypeScript + Vite project
 - Created Login, Register, Dashboard, and Profile pages
 - Implemented React Query for data fetching and caching
@@ -259,6 +285,7 @@ Throughout this project, I used AI assistance (ChatGPT) as a pair programming pa
 - AI assisted with React patterns, TypeScript types, UI/UX design, and state management
 
 ### Phase 6 - Additional Features
+
 - Added user profile page with admin dashboard
 - Implemented delete functionality for sweets
 - Added statistics display for admins
@@ -267,6 +294,7 @@ Throughout this project, I used AI assistance (ChatGPT) as a pair programming pa
 - Updated .gitignore for proper file exclusions
 
 ### Bug Fixes
+
 - Fixed client fixture in conftest.py
 - Fixed token expiration to use ACCESS_TOKEN_EXPIRE_MINUTES constant
 - Added database initialization on startup
@@ -279,6 +307,7 @@ Throughout this project, I used AI assistance (ChatGPT) as a pair programming pa
 ## 📸 Screenshots
 
 The application includes:
+
 1. **Login Page** - User authentication interface
 2. **Register Page** - New user registration
 3. **Dashboard** - Main sweets display with purchase functionality
