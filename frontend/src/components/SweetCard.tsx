@@ -1,13 +1,17 @@
-import { Sweet } from '../api'
-import './SweetCard.css'
+import { Sweet } from "../api";
+import "./SweetCard.css";
 
 interface SweetCardProps {
-  sweet: Sweet
-  onPurchase: (id: number) => void
-  isPurchasing: boolean
+  sweet: Sweet;
+  onPurchase: (id: number) => void;
+  isPurchasing: boolean;
 }
 
-export default function SweetCard({ sweet, onPurchase, isPurchasing }: SweetCardProps) {
+export default function SweetCard({
+  sweet,
+  onPurchase,
+  isPurchasing,
+}: SweetCardProps) {
   return (
     <div className="sweet-card">
       <div className="sweet-header">
@@ -29,8 +33,8 @@ export default function SweetCard({ sweet, onPurchase, isPurchasing }: SweetCard
         onClick={() => onPurchase(sweet.id)}
         disabled={sweet.quantity === 0 || isPurchasing}
       >
-        {isPurchasing ? 'Purchasing...' : 'Buy Now'}
+        {isPurchasing ? "Purchasing..." : "Buy Now"}
       </button>
     </div>
-  )
+  );
 }

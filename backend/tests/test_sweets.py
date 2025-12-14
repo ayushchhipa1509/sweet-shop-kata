@@ -21,7 +21,8 @@ def test_create_sweet_unauthorized(client: TestClient, session: Session):
     """Test 2: POST /sweets without token -> Expect 401 (Unauthorized)"""
     response = client.post(
         "/sweets",
-        json={"name": "Gulab Jamun", "category": "Classic", "price": 15.0, "quantity": 50}
+        json={"name": "Gulab Jamun", "category": "Classic",
+              "price": 15.0, "quantity": 50}
     )
     assert response.status_code == 401
 
@@ -31,8 +32,8 @@ def test_create_sweet_authorized(client: TestClient, session: Session):
     # Create a user and get token
     password = "password123"
     hashed_password = auth.get_password_hash(password)
-    user = User(username="adminuser", email="admin@example.com", 
-               password_hash=hashed_password, role="admin")
+    user = User(username="adminuser", email="admin@example.com",
+                password_hash=hashed_password, role="admin")
     session.add(user)
     session.commit()
 
@@ -47,7 +48,8 @@ def test_create_sweet_authorized(client: TestClient, session: Session):
     # Create sweet with token
     response = client.post(
         "/sweets",
-        json={"name": "Gulab Jamun", "category": "Classic", "price": 15.0, "quantity": 50},
+        json={"name": "Gulab Jamun", "category": "Classic",
+              "price": 15.0, "quantity": 50},
         headers={"Authorization": f"Bearer {token}"}
     )
     assert response.status_code == 201
@@ -82,7 +84,8 @@ def test_purchase_sweet(client: TestClient, session: Session):
 def test_purchase_sweet_out_of_stock(client: TestClient, session: Session):
     """Test: Purchase sweet with quantity 0 should fail"""
     # Create a sweet with 0 quantity
-    sweet = Sweet(name="Out of Stock", category="Classic", price=10.0, quantity=0)
+    sweet = Sweet(name="Out of Stock", category="Classic",
+                  price=10.0, quantity=0)
     session.add(sweet)
     session.commit()
     session.refresh(sweet)
@@ -98,7 +101,8 @@ def test_get_sweets_list(client: TestClient, session: Session):
     """Test: GET /sweets returns list of all sweets"""
     # Create some sweets
     sweet1 = Sweet(name="Ladoo", category="Classic", price=10.0, quantity=100)
-    sweet2 = Sweet(name="Gulab Jamun", category="Classic", price=15.0, quantity=50)
+    sweet2 = Sweet(name="Gulab Jamun", category="Classic",
+                   price=15.0, quantity=50)
     session.add(sweet1)
     session.add(sweet2)
     session.commit()

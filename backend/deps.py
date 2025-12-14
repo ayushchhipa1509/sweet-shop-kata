@@ -23,14 +23,16 @@ def get_current_user(
         headers={"WWW-Authenticate": "Bearer"},
     )
     try:
-        payload = jwt.decode(token, auth.SECRET_KEY, algorithms=[auth.ALGORITHM])
+        payload = jwt.decode(token, auth.SECRET_KEY,
+                             algorithms=[auth.ALGORITHM])
         username: str = payload.get("sub")
         if username is None:
             raise credentials_exception
     except JWTError:
         raise credentials_exception
-    
-    user = session.exec(select(models.User).where(models.User.username == username)).first()
+
+    user = session.exec(select(models.User).where(
+        models.User.username == username)).first()
     if user is None:
         raise credentials_exception
     return user

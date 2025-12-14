@@ -14,6 +14,7 @@ A full-stack web application for managing a sweet shop with user authentication,
 ## Tech Stack
 
 ### Backend
+
 - **FastAPI**: Modern Python web framework
 - **SQLModel**: SQL database ORM
 - **SQLite**: Database
@@ -21,6 +22,7 @@ A full-stack web application for managing a sweet shop with user authentication,
 - **Pytest**: Testing framework
 
 ### Frontend
+
 - **React 18**: UI library
 - **TypeScript**: Type safety
 - **Vite**: Build tool
@@ -61,11 +63,13 @@ sweet-shop-kata/
 ### Backend Setup
 
 1. Install dependencies:
+
 ```bash
 pip install fastapi uvicorn sqlmodel python-jose passlib bcrypt python-multipart
 ```
 
 2. Run the backend:
+
 ```bash
 cd backend
 uvicorn main:app --reload
@@ -76,12 +80,14 @@ The API will be available at `http://localhost:8000`
 ### Frontend Setup
 
 1. Install dependencies:
+
 ```bash
 cd frontend
 npm install
 ```
 
 2. Run the frontend:
+
 ```bash
 npm run dev
 ```
@@ -91,26 +97,31 @@ The frontend will be available at `http://localhost:3000`
 ## API Endpoints
 
 ### Authentication
+
 - `POST /auth/register` - Register a new user
 - `POST /auth/login` - Login and get JWT token
 
 ### Sweets
+
 - `GET /sweets` - Get all sweets (public)
 - `POST /sweets` - Create a new sweet (admin only)
 - `POST /sweets/{id}/purchase` - Purchase a sweet (public, decreases quantity)
 
 ### Health
+
 - `GET /health` - Health check endpoint
 
 ## Testing
 
 Run backend tests:
+
 ```bash
 cd backend
 pytest tests/ -v
 ```
 
 For HTML test report (requires pytest-html):
+
 ```bash
 pip install pytest-html
 pytest tests/ --html=report.html --self-contained-html
@@ -122,13 +133,15 @@ Throughout this project, I used AI assistance (ChatGPT) to:
 
 1. **Phase 1 - Project Setup**: Set up the initial FastAPI project structure with health check endpoint.
 
-2. **Phase 2 - Database Models**: 
+2. **Phase 2 - Database Models**:
+
    - Created SQLModel models for User and Sweet entities
    - Set up database connection with SQLite
    - Implemented test fixtures with in-memory database for test isolation
    - AI helped with model definitions and test structure
 
 3. **Phase 3 - Authentication**:
+
    - Implemented JWT token generation and validation
    - Created password hashing with bcrypt
    - Built registration and login endpoints
@@ -136,6 +149,7 @@ Throughout this project, I used AI assistance (ChatGPT) to:
    - AI assisted with JWT implementation and security best practices
 
 4. **Phase 4 - Sweets API**:
+
    - Created CRUD endpoints for sweets
    - Implemented purchase logic with quantity management
    - Added role-based access control (admin-only creation)
@@ -143,6 +157,7 @@ Throughout this project, I used AI assistance (ChatGPT) to:
    - AI helped with FastAPI dependency injection patterns
 
 5. **Phase 5 - Frontend**:
+
    - Set up React + TypeScript + Vite project
    - Created Login, Register, and Dashboard pages
    - Implemented React Query for data fetching
@@ -161,6 +176,7 @@ Throughout this project, I used AI assistance (ChatGPT) to:
 ## Screenshots
 
 Please add screenshots of:
+
 1. Login page
 2. Dashboard with sweets
 3. Admin "Add Sweet" modal

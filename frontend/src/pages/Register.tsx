@@ -1,33 +1,33 @@
-import { useState } from 'react'
-import { useNavigate, Link } from 'react-router-dom'
-import { authAPI } from '../api'
-import './Auth.css'
+import { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { authAPI } from "../api";
+import "./Auth.css";
 
 export default function Register() {
-  const [username, setUsername] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [error, setError] = useState('')
-  const [loading, setLoading] = useState(false)
-  const navigate = useNavigate()
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setError('')
-    setLoading(true)
+    e.preventDefault();
+    setError("");
+    setLoading(true);
 
     try {
-      await authAPI.register(username, email, password)
+      await authAPI.register(username, email, password);
       // After registration, login automatically
-      const loginResponse = await authAPI.login(username, password)
-      localStorage.setItem('token', loginResponse.access_token)
-      navigate('/dashboard')
+      const loginResponse = await authAPI.login(username, password);
+      localStorage.setItem("token", loginResponse.access_token);
+      navigate("/dashboard");
     } catch (err: any) {
-      setError(err.response?.data?.detail || 'Registration failed')
+      setError(err.response?.data?.detail || "Registration failed");
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <div className="auth-container">
@@ -64,7 +64,7 @@ export default function Register() {
           </div>
           {error && <div className="error">{error}</div>}
           <button type="submit" disabled={loading}>
-            {loading ? 'Registering...' : 'Register'}
+            {loading ? "Registering..." : "Register"}
           </button>
           <p className="auth-link">
             Already have an account? <Link to="/login">Login</Link>
@@ -72,5 +72,5 @@ export default function Register() {
         </form>
       </div>
     </div>
-  )
+  );
 }

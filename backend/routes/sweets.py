@@ -33,13 +33,13 @@ def create_sweet(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="Not enough permissions. Admin role required."
         )
-    
+
     # Create the sweet
     db_sweet = models.Sweet(**sweet_in.model_dump())
     session.add(db_sweet)
     session.commit()
     session.refresh(db_sweet)
-    
+
     return db_sweet
 
 
@@ -57,17 +57,17 @@ def purchase_sweet(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Sweet not found"
         )
-    
+
     if sweet.quantity <= 0:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Sweet is out of stock"
         )
-    
+
     # Decrease quantity by 1
     sweet.quantity -= 1
     session.add(sweet)
     session.commit()
     session.refresh(sweet)
-    
+
     return sweet

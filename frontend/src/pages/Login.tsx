@@ -1,30 +1,30 @@
-import { useState } from 'react'
-import { useNavigate, Link } from 'react-router-dom'
-import { authAPI } from '../api'
-import './Auth.css'
+import { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { authAPI } from "../api";
+import "./Auth.css";
 
 export default function Login() {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-  const [error, setError] = useState('')
-  const [loading, setLoading] = useState(false)
-  const navigate = useNavigate()
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setError('')
-    setLoading(true)
+    e.preventDefault();
+    setError("");
+    setLoading(true);
 
     try {
-      const response = await authAPI.login(username, password)
-      localStorage.setItem('token', response.access_token)
-      navigate('/dashboard')
+      const response = await authAPI.login(username, password);
+      localStorage.setItem("token", response.access_token);
+      navigate("/dashboard");
     } catch (err: any) {
-      setError(err.response?.data?.detail || 'Login failed')
+      setError(err.response?.data?.detail || "Login failed");
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <div className="auth-container">
@@ -52,7 +52,7 @@ export default function Login() {
           </div>
           {error && <div className="error">{error}</div>}
           <button type="submit" disabled={loading}>
-            {loading ? 'Logging in...' : 'Login'}
+            {loading ? "Logging in..." : "Login"}
           </button>
           <p className="auth-link">
             Don't have an account? <Link to="/register">Register</Link>
@@ -60,5 +60,5 @@ export default function Login() {
         </form>
       </div>
     </div>
-  )
+  );
 }
