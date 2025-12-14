@@ -11,7 +11,7 @@ engine = create_engine(sqlite_url, echo=True, connect_args=connect_args)
 
 def create_db_and_tables():
     # This will be called on startup to create the DB and tables if they don't exist
-    from . import models  # noqa
+    from backend import models  # noqa
     SQLModel.metadata.create_all(engine)
 
 

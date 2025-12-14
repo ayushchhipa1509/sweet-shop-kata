@@ -1,8 +1,8 @@
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
-from .routes import auth, sweets
-from .database import create_db_and_tables
+from backend.routes import auth, sweets
+from backend.database import create_db_and_tables
 
 
 @asynccontextmanager
